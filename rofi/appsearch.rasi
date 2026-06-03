@@ -1,0 +1,67 @@
+*{
+    bg0: #16191a;
+    bg1: #272c2e;
+    bg2: #414a4d;
+    txt-color1: #717c80;
+    txt-color2: #b3c6cc;
+}
+
+window {
+    width: 60%;
+    height: 40%;
+    border-radius: 10px;
+    children: [mainbox];
+    background-color: @bg0;
+}
+
+mainbox {
+    background-color: @bg0;
+    children: [inputbar, listview];
+    margin: 10px;
+}
+
+listview {
+    background-color: @bg0;
+    columns: 3;
+    spacing: 8px;
+    size: 10px;
+}
+
+textbox-search {
+    expand: false;
+    content: " ";
+    text-color: @txt-color2;
+    background-color: @bg0;
+    vertical-align: 0.5;
+}
+
+inputbar {
+    background-color: @bg0;
+    children: [textbox-search, entry];
+}
+
+entry {
+    placeholder: "Search";
+    background-color: @bg1;
+    text-color: @txt-color2;
+}
+
+element, element-icon, element-text {
+    background-color: @bg0;
+}
+
+element {
+    size: 4em;
+    orientation: vertical;
+} 
+element-icon {
+    horizontal-align: 0.5;
+    size: 2em;
+}
+
+element-text {
+    text-color: @txt-color1;
+    horizontal-align: 0.5;
+}
+
+
