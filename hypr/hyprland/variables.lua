@@ -1,0 +1,7 @@
+browser = "firefox"
+wallpaper = "hyprpaper"
+navbar = "waybar"
+terminal = "kitty"
+searchmenu = "rofi -show drun"
+file_manager = "dolphin"
+selectmenu = ""

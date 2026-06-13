@@ -26,7 +26,7 @@ install_files["gtk3-colors.css"]="$TARGET_HOME/.config/gtk3-colors.css"
 install_files+=(["scripts/create-project.sh"]="/usr/local/bin/create-project.sh" \
 	["scripts/open-book.sh"]="/usr/local/bin/open-book.sh" \
 	["scripts/screenshot.sh"]="/usr/local/bin/screenshot.sh" \
-	["scripts/tmux.sh"]="/usr/local/bin/tmux.sh" \
+	["scripts/tmux.sh"]="/usr/local/bin/tmux-search.sh" \
 )
 
 install_all_configs()
