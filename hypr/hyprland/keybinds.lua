@@ -43,13 +43,7 @@ hl.bind("SUPER + SHIFT + 8", hl.dsp.window.move({ workspace = 8 }))
 hl.bind("SUPER + SHIFT + 9", hl.dsp.window.move({ workspace = 9 }))
 hl.bind("SUPER + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
 
---Reloading Applications
-hl.bind("SUPER + SHIFT + R", hl.dsp.submap("reload"))
-hl.define_submap("reload", "reset", function()
-	hl.bind("W", hl.dsp.exec_cmd("killall -SIGUSR2 waybar"))
-	hl.bind("escape", hl.dsp.submap("reset"))
-end)
-
+--Open textbooks
 hl.bind("SUPER + O + B", hl.dsp.exec_cmd("open-book.sh"))
 
 --Mouse Binds
@@ -57,8 +51,18 @@ hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 --Media Key binds
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
+hl.bind(
+	"XF86AudioPlay",
+	hl.dsp.exec_cmd([[
+        sh -c 'if playerctl status 2>/dev/null | grep -q "^Playing$"; then
+            playerctl pause
+        else
+            playerctl play
+        fi'
+    ]]),
+	{ dont_inhibit = true }
+)
+
 hl.bind("SUPER + Left", hl.dsp.exec_cmd("playerctl position 5-"), { repeating = true, dont_inhibit = true })
 hl.bind("SUPER + Right", hl.dsp.exec_cmd("playerctl position 5+"), { repeating = true, dont_inhibit = true })
 hl.bind("SUPER + Up", hl.dsp.exec_cmd("playerctl next"))
@@ -74,8 +78,26 @@ hl.bind(
 	{ repeating = "true" }
 )
 
+--Controlling brightness
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%"), { repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { repeating = true })
+
 --Quit hyprland
 hl.bind(
 	"SUPER + M",
 	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit")
 )
+
+--Killing certain processes that run on daemons
+hl.bind("SUPER + SHIFT + K", hl.dsp.submap("kill-proc"))
+hl.define_submap("kill-proc", "reset", function()
+	hl.bind("W", hl.dsp.exec_cmd("killall waybar"))
+	hl.bind("escape", hl.dsp.submap("reset"))
+end)
+
+--Restarting processes that may have been killed
+hl.bind("SUPER + SHIFT + R", hl.dsp.submap("reload-proc"))
+hl.define_submap("reload-proc", "reset", function()
+	hl.bind("W", hl.dsp.exec_cmd("restart-process.sh waybar"))
+	hl.bind("escape", hl.dsp.submap("reset"))
+end)
