@@ -1,9 +1,13 @@
 require("hyprland.variables")
 
+--
 hl.on("hyprland.start", function()
-	hl.exec_cmd(browser)
-	hl.exec_cmd(navbar)
 	hl.exec_cmd(wallpaper)
+	hl.exec_cmd(navbar)
+	hl.exec_cmd(notif_daemon)
+	hl.exec_cmd(browser)
+	hl.exec_cmd("playerctld daemon")
+	hl.exec_cmd("hypridle")
 end)
 
 --General config

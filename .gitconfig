@@ -3,3 +3,5 @@
 	name = PeterA
 [init]
 	defaultBranch = main
+[core]
+	editor = nvim
